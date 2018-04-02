@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    
+    <constant name="struts.custom.i18n.resources" value="global"/>
+    
+    <package name="default" extends="struts-default">
+        <result-types>
+            <result-type name="tiles" 
+                         class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+
+        <!--Metodos Seguridad-->
+        <action name="inicio" 
+                 class="pe.edu.cibertec.action.UsuarioAction" 
+                 method="inicio">
+            <result name="login">/seguridad/login.jsp</result>
+        </action>
+        
+        <action name="login" 
+                class="pe.edu.cibertec.action.UsuarioAction" 
+                method="login">
+            <result type="tiles">d_principal</result>
+            <result name="login">/seguridad/login.jsp</result>
+            <result name="input">/seguridad/login.jsp</result>
+        </action>
+         <action name="logout" 
+                 class="pe.edu.cibertec.action.UsuarioAction" 
+                 method="logout">
+            <result name="login">/seguridad/login.jsp</result>
+        </action>
+        
+        <action name="home" 
+                 class="pe.edu.cibertec.action.UsuarioAction" 
+                 method="home">
+            <result type="tiles">d_principal</result>
+        </action>
+        
+        <!--Metodos Cliente-->
+        <action name="listarCliente" 
+                 class="pe.edu.cibertec.action.ClienteAction" 
+                 method="listarTodo">
+            <result type="tiles">d_listadoCliente</result>
+        </action>        
+        <action name="inicializarCliente" 
+                 class="pe.edu.cibertec.action.ClienteAction" 
+                 method="inicializar">
+            <result type="tiles">d_nuevoCliente</result>
+        </action>
+        <action name="registrarCliente"  
+                 class="pe.edu.cibertec.action.ClienteAction" 
+                 method="registrar">
+            <result name="input" type="tiles">d_nuevoCliente</result>
+            <result type="redirectAction">listarCliente</result>
+        </action>        
+        <action name="eliminarCliente" 
+                class="pe.edu.cibertec.action.ClienteAction" 
+                method="eliminar">
+            <result type="redirectAction">listarCliente</result>
+        </action>
+        <action name="editarCliente" 
+                class="pe.edu.cibertec.action.ClienteAction" 
+                method="editar">
+            <result type="tiles">d_editaCliente</result>
+        </action>
+        <action name="actualizarCliente" 
+                class="pe.edu.cibertec.action.ClienteAction" 
+                method="actualizar">
+            <result name="input" type="tiles">d_editaCliente</result>
+            <result type="redirectAction">listarCliente</result>
+        </action>
+       
+    </package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</struts>
